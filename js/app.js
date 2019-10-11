@@ -160,8 +160,15 @@ function downloadChibi() {
     showLoaderOnConfirm: true
   }).then((result) => {
     if (result) {
+      // show white background
+      whitefill.style.display = "block";
+
+      // save svg file
       var blob = new Blob([ svgarea.innerHTML ], {type: "text/html"});
       saveAs(blob, result + ".svg");
+
+      // fade out white background
+      $(".whitefill").fadeOut();
 
       swal(
         'Yay!',
