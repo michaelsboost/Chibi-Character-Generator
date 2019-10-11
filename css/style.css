@@ -1,0 +1,60 @@
+/* globals */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #4A98E1;
+  transition: all 0.3s ease-in 0s;
+}
+
+/* hidden scrollbar */
+html {
+  -ms-overflow-style: none;  /* IE 10+ */
+  scrollbar-width: none;  /* Firefox */
+  scrollbar-color: transparent transparent;
+}
+body {
+  overflow-y: auto;
+}
+body::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
+.bluebg {
+  background-color: #4A98E1;
+}
+.pinkbg {
+  background-color: #CB4AE1;
+}
+.whitefill {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  z-index: 2;
+}
+
+/* header */
+.header {
+  padding: 20px 20px;
+}
+.header a {
+  text-decoration: none;
+}
+.header i {
+  color: #fff;
+  font-size: 3em;
+  margin: 0 10px;
+}
+
+/* svg area */
+.svgarea {
+  margin: auto;
+}
+
+/* buttons */
+.buttons {
+  margin-top: 1em;
+}

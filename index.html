@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chibi Character Generator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta name="description" content="Just a simple chibi/kawaii style character generator.">
+    <meta name="author" content="Michael Schwartz">
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="libraries/normalize/normalize.css">
+    <link rel="stylesheet" href="libraries/polyui/polyui.css">
+    <link rel="stylesheet" href="libraries/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="libraries/font-awesome/font-awesome.css">
+    <link rel="stylesheet" href="libraries/font-awesome/macset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/polyrise.css">
+    <meta property="og:url"         content="https://michaelsboost.com/Chibi-Character-Generator" />
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content="Chibi Character Generator" />
+    <meta property="og:description" content="Just a simple chibi/kawaii style character generator." />
+    <meta property="og:image"       content="https://raw.githubusercontent.com/michaelsboost/Chibi-Character-Generator/gh-pages/rendered-example2.png" />
+  </head>
+  <body>
+    <!-- white background for snapshot -->
+    <div id="whitefill" class="whitefill" style="display: none;"></div>
+    
+    <!-- header buttons -->
+    <header id="header" class="header">
+      <!-- float left -->
+      <div class="fl">
+        <!-- contribute to the software -->
+        <a href="https://github.com/michaelsboost/Chibi-Character-Generator" target="_blank">
+          <i class="fa fa-info"></i>
+        </a>
+        
+        <!-- take snapshot of generated image -->
+        <a id="snapshot" href="javascript:snapshot();">
+          <i class="fa fa-camera"></i>
+        </a>
+      </div>
+
+      <!-- float right -->
+      <div class="fr">
+        <!-- download image -->
+        <a id="download" href="javascript:downloadChibi()" class="download">
+          <i class="fa fa-download"></i>
+        </a>
+
+        <a class="donate" href="http://michaelsboost.github.io/donate" target="_blank">
+          <i class="fa fa-handshake-o"></i>
+        </a>
+      </div>
+    </header>
+
+    <!-- center vertically -->
+    <div id="grabDesign" class="table">
+      <div class="cell">
+        <!-- SVG display area -->
+        <div class="grid">
+          <div class="grid--col--12">
+            <!-- display rendered SVG character -->
+            <div id="svgarea" class="svgarea">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1080 1080" style="isolation:isolate; width:100%;" preserveAspectRatio="xMidYMax meet">
+                <g clip-path="url(#_clipPath_6VtVQ6ug9GJNq3HdASVyzM3wQeEjhqLE)">
+                  <g>
+                    <ellipse vector-effect="non-scaling-stroke" cx="540" cy="933.0000000000001" rx="172.99999999999997" ry="19" fill="rgb(0,0,0)" fill-opacity="0.2" />
+                    <!-- body -->
+                    <g>
+                      <!-- body/legs/arms shape -->
+                      <path d=" M 528.182 818.182 L 528.182 902.864 C 528.182 919.496 514.678 933 498.045 933 L 498.045 933 C 481.413 933 467.909 919.496 467.909 902.864 L 467.909 804.697 L 467.909 804.697 C 438.925 787.644 419.455 756.123 419.455 720.091 L 419.455 702 L 325 702 C 310.926 702 299.5 690.574 299.5 676.5 L 299.5 676.5 L 299.5 676.5 C 299.5 662.426 310.926 651 325 651 L 419.455 651 L 419.455 622 L 660.545 622 L 660.545 651 L 755 651 C 769.074 651 780.5 662.426 780.5 676.5 L 780.5 676.5 C 780.5 690.574 769.074 702 755 702 L 660.545 702 L 660.545 702 L 660.545 720.091 C 660.545 756.123 641.075 787.644 612.091 804.697 L 612.091 902.864 C 612.091 919.496 598.587 933 581.955 933 L 581.955 933 C 565.322 933 551.818 919.496 551.818 902.864 L 551.818 818.182 L 551.818 818.182 L 528.182 818.182 Z " fill="rgb(233,233,233)" />
+
+                      <!-- miscbody (ex: ties) -->
+                      <g id="miscbody">
+                        <g></g>
+                      </g>
+                      <!-- apparel -->
+                      <g id="apparel">
+                        <g>
+                          <path d=" M 428.846 762 C 437.3 779.845 450.982 794.738 467.909 804.697 L 467.909 804.697 L 467.909 882 L 467.909 902.864 C 467.909 919.496 481.413 933 498.045 933 L 498.045 933 C 514.678 933 528.182 919.496 528.182 902.864 L 528.182 882 L 528.182 818.182 L 551.818 818.182 L 551.818 818.182 L 551.818 882 L 551.818 902.864 C 551.818 919.496 565.322 933 581.955 933 L 581.955 933 C 598.587 933 612.091 919.496 612.091 902.864 L 612.091 882 L 612.091 804.697 C 629.018 794.738 642.7 779.845 651.154 762 L 428.846 762 Z " fill="rgb(20,15,45)" />
+                          <path d=" M 428.846 762 C 422.824 749.289 419.455 735.08 419.455 720.091 L 419.455 702 L 325 702 C 310.926 702 299.5 690.574 299.5 676.5 L 299.5 676.5 L 299.5 676.5 C 299.5 662.426 310.926 651 325 651 L 419.455 651 L 419.455 622 L 660.545 622 L 660.545 651 L 755 651 C 769.074 651 780.5 662.426 780.5 676.5 L 780.5 676.5 C 780.5 690.574 769.074 702 755 702 L 660.545 702 L 660.545 702 L 660.545 720.091 C 660.545 735.08 657.176 749.289 651.154 762 L 428.846 762 Z " fill="rgb(233,233,233)" />
+                          <path d=" M 428.846 762 C 422.824 749.289 419.455 735.08 419.455 720.091 L 419.455 702 L 363 702 L 363 651 L 419.455 651 L 419.455 622 L 660.545 622 L 660.545 651 L 717 651 L 717 702 L 660.545 702 L 660.545 702 L 660.545 720.091 C 660.545 735.08 657.176 749.289 651.154 762 L 428.846 762 Z " fill="#f96666" />
+                        </g>
+                      </g>
+                    </g>
+
+                    <!-- head -->
+                    <g>
+                      <!-- head/face shape -->
+                      <path d=" M 540 665 C 296.889 665 310.5 485.859 310.5 481 C 310.5 346.885 413.336 238 540 238 C 666.664 238 769.5 346.885 769.5 481 C 769.5 485.859 783.111 665 540 665 Z " fill="rgb(233,233,233)" />
+
+                      <g id="hair">
+                        <g>
+                          <path d=" M 264.718 326.297 Q 259.3 532.186 347.755 593 C 327.628 551.433 333.241 480.027 364.771 378.604 C 479.981 394.895 596.581 394.31 714.731 376.99 C 746.699 479.267 752.479 551.212 732.245 593 Q 827.2 527.718 813.978 295.256 C 812.59 270.84 779.34 169.189 656.93 128.351 C 636.154 120.906 696.891 101.424 685.54 90.923 C 676.005 85.856 609.021 103.82 597.968 102.599 C 589.709 101.686 600.269 72.937 592.13 73.408 C 575.179 79.1 530.934 115.832 515.276 112.115 C 502.641 112.921 521.872 89.079 510.397 90.923 C 473.027 96.926 410.404 133.272 384.248 147.219 C 294.541 195.054 265.945 275.853 265.196 295.256 C 264.766 306.396 264.616 316.728 264.718 326.297 Z " fill="rgb(20,15,45)" />
+                        </g>
+                      </g>
+                      <g id="ears">
+                        <g>
+                          <g>
+                            <path d=" M 762.486 421.241 C 780.316 424.457 793.862 440.068 793.862 458.819 C 793.862 475.029 783.738 488.894 769.467 494.417 C 769.823 486.633 769.5 481.748 769.5 481 C 769.5 460.381 767.069 440.359 762.486 421.241 Z " fill="rgb(233,233,233)" />
+                          </g>
+                          <g>
+                            <path d=" M 317.514 421.241 C 299.684 424.457 286.138 440.068 286.138 458.819 C 286.138 475.029 296.262 488.894 310.533 494.417 C 310.177 486.633 310.5 481.748 310.5 481 C 310.5 460.381 312.931 440.359 317.514 421.241 Z " fill="rgb(233,233,233)" />
+                          </g>
+                        </g>
+                      </g>
+                      <g id="mouth">
+                        <g>
+                          <path d=" M 593.806 540 C 571.525 556.792 507.264 555.823 486.598 540 Q 508.233 582 539.556 582 Q 570.879 582 593.806 540 Z " fill="rgb(20,15,45)" />
+                        </g>
+                      </g>
+                      <g id="eyes">
+                        <g>
+                          <g>
+                            <path d="M 418.5 426 L 418.5 426 C 429.538 426 438.5 434.962 438.5 446 L 438.5 446 C 438.5 457.038 429.538 466 418.5 466 L 418.5 466 C 407.462 466 398.5 457.038 398.5 446 L 398.5 446 C 398.5 434.962 407.462 426 418.5 426 Z" style="stroke:none;fill:#140F2D;stroke-miterlimit:10;" />
+                            <path d="M 410 433 L 410 433 C 412.484 433 414.5 435.016 414.5 437.5 L 414.5 437.5 C 414.5 439.984 412.484 442 410 442 L 410 442 C 407.516 442 405.5 439.984 405.5 437.5 L 405.5 437.5 C 405.5 435.016 407.516 433 410 433 Z" style="stroke:none;fill:#E9E9E9;stroke-miterlimit:10;" />
+                          </g>
+                          <g>
+                            <path d="M 661.5 426 L 661.5 426 C 672.538 426 681.5 434.962 681.5 446 L 681.5 446 C 681.5 457.038 672.538 466 661.5 466 L 661.5 466 C 650.462 466 641.5 457.038 641.5 446 L 641.5 446 C 641.5 434.962 650.462 426 661.5 426 Z" style="stroke:none;fill:#140F2D;stroke-miterlimit:10;" />
+                            <path d="M 653 433 L 653 433 C 655.484 433 657.5 435.016 657.5 437.5 L 657.5 437.5 C 657.5 439.984 655.484 442 653 442 L 653 442 C 650.516 442 648.5 439.984 648.5 437.5 L 648.5 437.5 C 648.5 435.016 650.516 433 653 433 Z" style="stroke:none;fill:#E9E9E9;stroke-miterlimit:10;" />
+                          </g>
+                        </g>
+                      </g>
+                      <g id="nose">
+                        <g>
+                          <path d=" M 513.967 519.82 L 506.867 519.82 L 506.867 519.82 C 525.153 550.727 554.847 550.727 573.133 519.82 L 573.133 519.82 L 566.033 519.82 L 566.033 519.82 C 551.665 544.104 528.335 544.104 513.967 519.82 L 513.967 519.82 Z " fill="none" />
+                        </g>
+                      </g>
+                      <g id="misc">
+                        <g>
+                          <path d=" M 361.5 523 C 361.5 509.202 378.079 498 398.5 498 C 418.921 498 435.5 509.202 435.5 523 C 435.5 536.798 418.921 548 398.5 548 C 378.079 548 361.5 536.798 361.5 523 Z  M 718.5 523 C 718.5 509.202 701.921 498 681.5 498 C 661.079 498 644.5 509.202 644.5 523 C 644.5 536.798 661.079 548 681.5 548 C 701.921 548 718.5 536.798 718.5 523 Z " fill-rule="evenodd" fill="none" />
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- randomize button section -->
+        <div id="btnArea" class="grid" style="margin-top: -2em;" data-html2canvas-ignore="true">
+          <div class="grid--col--12 tc buttons">
+            <!-- randomize character button -->
+            <button id="randomize" class="btn--white block w100p">
+              randomize
+            </button>
+          </div>
+        </div>
+
+        <!-- author section -->
+        <div class="grid">
+          <div class="grid--col--12 tc whitetxt">
+            <div id="author"><br>
+              Made with <span class="fa fa-heart" style="color: #f66;"></span> and <span class="fa fa-coffee" style="color: #D0C4A7;"></span> by <a class="whitetxt" href="http://michaelsboost.github.io/" target="_blank"><u>Michael</u></a> &amp; others.<br><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="libraries/filesaver/Blob.js"></script>
+    <script src="libraries/filesaver/FileSaver.js"></script>
+    <script src="libraries/sweetalert2/sweetalert2.min.js"></script>
+    <script src="libraries/html2canvas/html2canvas.js"></script>
+    <script src="libraries/jquery/jquery.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
