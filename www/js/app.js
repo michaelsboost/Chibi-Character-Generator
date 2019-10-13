@@ -83,14 +83,135 @@ var characterAttributes = {
   	'<g><path d=" M 428.846 762 C 437.3 779.845 450.982 794.738 467.909 804.697 L 467.909 804.697 L 467.909 882 L 467.909 902.864 C 467.909 919.496 481.413 933 498.045 933 L 498.045 933 C 514.678 933 528.182 919.496 528.182 902.864 L 528.182 882 L 528.182 818.182 L 551.818 818.182 L 551.818 818.182 L 551.818 882 L 551.818 902.864 C 551.818 919.496 565.322 933 581.955 933 L 581.955 933 C 598.587 933 612.091 919.496 612.091 902.864 L 612.091 882 L 612.091 804.697 C 629.018 794.738 642.7 779.845 651.154 762 L 428.846 762 Z " fill="rgb(20,15,45)"/><path d=" M 428.846 762 C 422.824 749.289 419.455 735.08 419.455 720.091 L 419.455 702 L 325 702 C 310.926 702 299.5 690.574 299.5 676.5 L 299.5 676.5 L 299.5 676.5 C 299.5 662.426 310.926 651 325 651 L 419.455 651 L 419.455 622 L 660.545 622 L 660.545 651 L 755 651 C 769.074 651 780.5 662.426 780.5 676.5 L 780.5 676.5 C 780.5 690.574 769.074 702 755 702 L 660.545 702 L 660.545 702 L 660.545 720.091 C 660.545 735.08 657.176 749.289 651.154 762 L 428.846 762 Z " fill="rgb(233,233,233)"/><path d=" M 428.846 762 C 422.824 749.289 419.455 735.08 419.455 720.091 L 419.455 702 L 363 702 L 363 651 L 419.455 651 L 419.455 622 L 660.545 622 L 660.545 651 L 717 651 L 717 702 L 660.545 702 L 660.545 702 L 660.545 720.091 C 660.545 735.08 657.176 749.289 651.154 762 L 428.846 762 Z " fill="#f96666"/></g>',
     '<g><path d=" M 428.846 762 C 437.3 779.845 450.982 794.738 467.909 804.697 L 467.909 804.697 L 467.909 882 L 528.182 882 L 528.182 818.182 L 551.818 818.182 L 551.818 818.182 L 551.818 882 L 612.091 882 L 612.091 804.697 C 629.018 794.738 642.7 779.845 651.154 762 L 428.846 762 Z " fill="rgb(20,15,45)"/><path d=" M 428.846 762 C 422.824 749.289 419.455 735.08 419.455 720.091 L 419.455 702 L 325 702 C 310.926 702 299.5 690.574 299.5 676.5 L 299.5 676.5 L 299.5 676.5 C 299.5 662.426 310.926 651 325 651 L 419.455 651 L 419.455 622 L 660.545 622 L 660.545 651 L 755 651 C 769.074 651 780.5 662.426 780.5 676.5 L 780.5 676.5 C 780.5 690.574 769.074 702 755 702 L 660.545 702 L 660.545 702 L 660.545 720.091 C 660.545 735.08 657.176 749.289 651.154 762 L 428.846 762 Z " fill="rgb(233,233,233)"/><path d=" M 428.846 762 C 422.824 749.289 419.455 735.08 419.455 720.091 L 419.455 702 L 363 702 L 363 651 L 419.455 651 L 419.455 622 L 660.545 622 L 660.545 651 L 717 651 L 717 702 L 660.545 702 L 660.545 702 L 660.545 720.091 C 660.545 735.08 657.176 749.289 651.154 762 L 428.846 762 Z " fill="#f96666"/></g>'
   ]
-};
+},
+    saveFile = function(fileData, fileName) {
+      // Get access to the file system
+      window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSystem) {
+        // Create the file.
+        fileSystem.root.getFile(fileName, { create: true, exclusive: false }, function (entry) {
+          // After you save the file, you can access it with this URL
+          myFileUrl = entry.toURL();
+          entry.createWriter(function(writer) {
+            writer.onwriteend = function(evt) {
+              swal(
+                'Yay!',
+                'You\'re character was successfully saved to ' + myFileUrl,
+                'success'
+              );
+            };
+            // Write to the file
+            writer.write(fileData);
+          }, function(error) {
+            swal(
+              'Oops!',
+              'Could not create file writer, ' + error.code,
+              'error'
+            );
+          });
+        }, function(error) {
+          swal(
+            'Oops!',
+            'Could not create file, ' + error.code,
+            'error'
+          );
+        });
+      }, function(evt) {
+        swal(
+          'Oops!',
+          'Could not access file system, ' + evt.target.error.code,
+          'error'
+        );
+      });
+    };
+
+/**
+ * Convert a base64 string in a Blob according to the data and contentType.
+ * 
+ * @param b64Data {String} Pure base64 string without contentType
+ * @param contentType {String} the content type of the file i.e (image/jpeg - image/png - text/plain)
+ * @param sliceSize {Int} SliceSize to process the byteCharacters
+ * @see http://stackoverflow.com/questions/16245767/creating-a-blob-from-a-base64-string-in-javascript
+ * @return Blob
+ */
+function b64toBlob(b64Data, contentType, sliceSize) {
+  contentType = contentType || '';
+  sliceSize = sliceSize || 512;
+
+  var byteCharacters = atob(b64Data);
+  var byteArrays = [];
+
+  for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+    var byteNumbers = new Array(slice.length);
+    for (var i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+
+    var byteArray = new Uint8Array(byteNumbers);
+
+    byteArrays.push(byteArray);
+  }
+
+  var blob = new Blob(byteArrays, {type: contentType});
+  return blob;
+}
+
+/**
+ * Create a Image file according to its database64 content only.
+ * 
+ * @param folderpath {String} The folder where the file will be created
+ * @param filename {String} The name of the file that will be created
+ * @param content {Base64 String} Important : The content can't contain the following string (data:image/png[or any other format];base64,). Only the base64 string is expected.
+ */
+function savebase64AsImageFile(filename,content,contentType) {
+  // Convert the base64 string in a Blob
+  var DataBlob = b64toBlob(content,contentType);
+
+  // Starting to write the file
+
+  // if cordova.file is not available use instead :
+  // var folderpath = "file:///storage/emulated/0/";
+  var folderpath = cordova.file.externalRootDirectory;
+  window.resolveLocalFileSystemURL(folderpath, function(dir) {
+    // Access to the directory granted succesfully
+    dir.getFile(filename, {create: true, exclusive: false}, function(file) {
+      // After you save the file, you can access it with this URL
+      myFileUrl = file.toURL();
+      // File created succesfully
+      file.createWriter(function(fileWriter) {
+        fileWriter.onwriteend = function(evt) {
+          swal(
+            'Yay!',
+            'You\'re character was successfully saved to ' + myFileUrl,
+            'success'
+          );
+        };
+        // Writing content to file
+        fileWriter.write(DataBlob);
+      }, function(){
+        swal(
+          'Oops!',
+          'Unable to save file in path ' + folderpath,
+          'error'
+        );
+      });
+    });
+  });
+}
 
 // listen for resize changes
 function detectOrientation() {
+  var svgAreas = document.querySelectorAll('.svgarea'), i;
+
   if (window.innerHeight > window.innerWidth) {
-    svgarea.style.width = "100%";
+    for (i = 0; i < svgAreas.length; ++i) {
+      svgAreas[i].style.width = "100%";
+    }
   } else {
-    svgarea.style.width = "50%";
+    for (i = 0; i < svgAreas.length; ++i) {
+      svgAreas[i].style.width = "50%";
+    }
   }
 }
 window.addEventListener("resize", function() {
@@ -146,6 +267,21 @@ function randomizeChibi() {
   var ranMiscbody = randomNumber(characterAttributes.miscbody.length);
   ranMiscbody     = characterAttributes.miscbody[ranMiscbody];
   miscbody.innerHTML = ranMiscbody;
+
+  // Convert SVG to Image
+  // http://stackoverflow.com/questions/3768565/drawing-a-svg-file-on-a-html5-canvas
+  // get svg data
+  var xml = new XMLSerializer().serializeToString(chibi);
+
+  // make it base64
+  var svg64 = btoa(xml);
+  var b64Start = 'data:image/svg+xml;base64,';
+
+  // prepend a "header"
+  var image64 = b64Start + svg64;
+
+  // set it as the source of the img element
+  imgOutput.src = image64;
 }
 randomizeChibi();
 
@@ -164,17 +300,11 @@ function downloadChibi() {
       whitefill.style.display = "block";
 
       // save svg file
-      var blob = new Blob([ svgarea.innerHTML ], {type: "text/html"});
-      saveAs(blob, result + ".svg");
+      var blob = new Blob([ svgholder.innerHTML ], {type: "text/html"});
+      saveFile(blob, result + ".svg");
 
       // fade out white background
       $(".whitefill").fadeOut();
-
-      swal(
-        'Yay!',
-        'You\'re character was successfully saved!',
-        'success'
-      );
     } else {
       swal(
         'Oops!',
@@ -193,10 +323,18 @@ function snapshot() {
   // show white background
   whitefill.style.display = "block";
   
+  // draw the image onto the canvas
+  svg2canvas.classList.remove("hide");
+  svg2img.classList.remove("hide");
+  output.width = imgOutput.width;
+  output.height = imgOutput.height;
+  output.getContext('2d').drawImage(imgOutput, 0, 0);
+  svg2img.classList.add("hide");
+  
   // grab main author text
   grabDesign.classList.add("screenshot", "static");
   var mainAuthorTxt = author.innerHTML;
-  author.innerHTML = "<h2 class=\"whitetxt nomar\">https://michaelsboost.com/chibigenerator/</h2>";
+  author.innerHTML = "<h2 class=\"whitetxt\" style='\margin-top: 0; margin-bottom: 3em;'>https://michaelsboost.com/chibigenerator/</h2>";
 
   // hide header & buttons
   btnArea.classList.add("hide");
@@ -207,43 +345,34 @@ function snapshot() {
   grabDesign.style.height = "600px";
   grabDesign.style.background = "#4A98E1";
   
-  var tempEl = document.createElement("div")
-  tempEl.id = tempEl
-  fileName = "chibi-character";
-  
   // convert website to image
-  html2canvas(grabDesign, {
-    allowTaint: true,
-    useCORS: true,
-    foreignObjectRendering: true
-  }).then(function(canvas) {
-    // download canvas image
-    myBase64 = canvas.toDataURL("image/png");
-    var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
-    if (iOS === true) {
-      // remove image if already visible
-      var img = new Image();
-      img.crossOrigin = "Anonymous";
-      img.id = "getshot";
-      img.src = myBase64;
-      document.body.appendChild(img);
+  html2canvas(grabDesign).then(function(canvas) {
+    /** Process the type1 base64 string **/
+//      var myBase64 = canvas.toDataURL();
+    var myBase64 = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
 
-      var a = document.createElement("a");
-      a.href = getshot.src;
-      a.download = fileName + ".png";
-      a.click();
-      document.body.removeChild(img);
-    } else {
-      canvas.toBlob(function(blob) {
-        saveAs(blob, fileName + ".png");
-      }, "image/png");
-    }
+    // Split the base64 string in data and contentType
+    var block = myBase64.split(";");
+    // Get the content type
+    var dataType = block[0].split(":")[1]; // In this case "image/png"
+    // get the real base64 content of the file
+    var realData = block[1].split(",")[1]; // In this case "iVBORw0KGg...."
+
+    today = new Date();
+    saveDate = today.getMonth() + 1 + "_" + today.getDate() + "_" + today.getFullYear();
+
+    // To define the type of the Blob
+    var filename = "chibi-character " + saveDate + ".png";
+
+    savebase64AsImageFile(filename,realData,dataType);
   });
 
   // revert canvas styles back to defaults
   grabDesign.style.width = "";
   grabDesign.style.height = "";
   grabDesign.style.background = "";
+  svg2canvas.classList.add("hide");
+  svg2img.classList.remove("hide");
   
   // show header & buttons
   header.classList.remove("hide");

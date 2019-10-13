@@ -1,17 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Chibi Character Generator</title>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0">
-    <meta name="description" content="Just a simple chibi/kawaii style character generator.">
-    <meta name="author" content="Michael Schwartz">
-    <meta http-equiv="X-UA-Compatible" content="IE=9" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="manifest" href="site.webmanifest">
     <link rel="stylesheet" href="libraries/normalize/normalize.css">
     <link rel="stylesheet" href="libraries/polyui/polyui.css">
     <link rel="stylesheet" href="libraries/sweetalert2/sweetalert2.min.css">
@@ -19,11 +10,6 @@
     <link rel="stylesheet" href="libraries/font-awesome/macset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/polyrise.css">
-    <meta property="og:url"         content="https://michaelsboost.com/Chibi-Character-Generator" />
-    <meta property="og:type"        content="website" />
-    <meta property="og:title"       content="Chibi Character Generator" />
-    <meta property="og:description" content="Just a simple chibi/kawaii style character generator." />
-    <meta property="og:image"       content="https://raw.githubusercontent.com/michaelsboost/Chibi-Character-Generator/gh-pages/rendered-example2.png" />
   </head>
   <body>
     <!-- white background for snapshot -->
@@ -34,7 +20,7 @@
       <!-- float left -->
       <div class="fl">
         <!-- contribute to the software -->
-        <a href="https://github.com/michaelsboost/Chibi-Character-Generator" target="_blank">
+        <a href="javascript:window.open('https://github.com/michaelsboost/Chibi-Character-Generator', '_system')" target="_blank">
           <i class="fa fa-github"></i>
         </a>
         
@@ -44,7 +30,7 @@
         </a>
         
         <!-- view on Codepen -->
-        <a href="https://codepen.io/michaelsboost/pen/VwwvgXB?editors=0100" target="_blank">
+        <a href="javascript:window.open('https://codepen.io/michaelsboost/pen/VwwvgXB?editors=0100', '_system')" target="_blank">
           <i class="fa fa-codepen"></i>
         </a>
       </div>
@@ -56,7 +42,7 @@
           <i class="fa fa-download"></i>
         </a>
 
-        <a class="donate" href="http://michaelsboost.github.io/donate" target="_blank">
+        <a class="donate" href="javascript:window.open('http://michaelsboost.github.io/donate', '_system')" target="_blank">
           <i class="fa fa-handshake-o"></i>
         </a>
       </div>
@@ -69,8 +55,8 @@
         <div class="grid">
           <div class="grid--col--12">
             <!-- display rendered SVG character -->
-            <div id="svgarea" class="svgarea">
-              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1080 1080" style="isolation:isolate; width:100%;" preserveAspectRatio="xMidYMax meet">
+            <div id="svgholder" class="svgarea tc hide" data-html2canvas-ignore="true">
+              <svg id="chibi" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1080 1080" style="isolation:isolate; width:100%;" preserveAspectRatio="xMidYMax meet">
                 <g clip-path="url(#_clipPath_6VtVQ6ug9GJNq3HdASVyzM3wQeEjhqLE)">
                   <g>
                     <ellipse vector-effect="non-scaling-stroke" cx="540" cy="933.0000000000001" rx="172.99999999999997" ry="19" fill="rgb(0,0,0)" fill-opacity="0.2" />
@@ -145,6 +131,16 @@
                 </g>
               </svg>
             </div>
+
+            <!-- outputs image as canvas -->
+            <div id="svg2canvas" class="svgarea tc hide">
+              <canvas id="output" style="width: 100%;" />
+            </div>
+            
+            <!-- outputs svg as image -->
+            <div id="svg2img" class="svgarea tc" style="margin: 0 auto;" data-html2canvas-ignore="true">
+              <img id="imgOutput" style="margin: -10px auto;">
+            </div>
           </div>
         </div>
 
@@ -162,18 +158,19 @@
         <div class="grid">
           <div class="grid--col--12 tc whitetxt">
             <div id="author"><br>
-              Made with <span class="fa fa-heart" style="color: #f66;"></span> and <span class="fa fa-coffee" style="color: #D0C4A7;"></span> by <a class="whitetxt" href="http://michaelsboost.github.io/" target="_blank"><u>Michael</u></a> &amp; others.<br><br>
+              Made with <span class="fa fa-heart" style="color: #f66;"></span> and <span class="fa fa-coffee" style="color: #D0C4A7;"></span> by <a class="whitetxt" href="javascript:window.open('http://michaelsboost.github.io/', '_system')"><u>Michael</u></a> &amp; others.<br><br>
             </div>
           </div>
         </div>
       </div>
     </div>
-
+    
     <script src="libraries/filesaver/Blob.js"></script>
     <script src="libraries/filesaver/FileSaver.js"></script>
     <script src="libraries/sweetalert2/sweetalert2.min.js"></script>
     <script src="libraries/html2canvas/html2canvas.js"></script>
     <script src="libraries/jquery/jquery.js"></script>
+    <script src="cordova.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>
